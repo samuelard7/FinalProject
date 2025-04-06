@@ -121,5 +121,5 @@ Phase	Task	Duration
 ### Nuruzzaman, Md. (2015). Urban Heat Island: Causes, Effects and Mitigation Measures -A Review. International Journal of Environmental Monitoring and Analysis. 3. 67-73. 10.11648/j.ijema.20150302.15. 
 
 
-Conclusion
+## Conclusion
 This project aims to revolutionize UHI mitigation using AI and IoT-based solutions. By predicting environmental trends and automating cooling strategies, we can reduce urban heat stress, improve air quality, and create sustainable cities.
