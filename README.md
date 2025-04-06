@@ -104,6 +104,7 @@ Python, C++	AI Model & Microcontroller programming
 Arduino IDE	Microcontroller development
 TensorFlow, Scikit-Learn	Machine learning model development
 AWS IoT, Firebase	Cloud storage for real-time data
+
 ## Planning of Work
 Phase	Task	Duration
 1	Literature Review	2 Weeks
@@ -112,14 +113,13 @@ Phase	Task	Duration
 4	System Integration & Field Testing	4 Weeks
 5	Deployment & Optimization	3 Weeks
 6	Report & Documentation	2 Weeks
-9. References
-Comparative Analysis of Machine Learning Techniques for Predicting Air Quality in Smart Cities ([Elsevier])
 
-AI-Enabled Urban Heat Island Mitigation System ([Springer])
+## References
+### Abid Khan, houbing Herbert Song and Munam Ali Singh, “Comparative Analysis of Machine Learning Techniques for Predicting Air Quality in Smart Cities,” Elsevier, vol. 3, no. 10, pp. 1-30, DOI:10.1109/ACCESS.2019.2925082
+### Jain, H., Dhupper, R., Shrivastava, A. et al. AI-enabled strategies for climate change adaptation: protecting communities, infrastructure, and businesses from the impacts of climate change. Comput.Urban Sci. 3, 25 (2023). https://doi.org/10.1007/s43762-023-00100-2
+### T. Verma, S. Bilgaiyan and J. P. Singh, "Application of Machine Learning in Climate Change Strategies," 2024 Second International Conference on Networks, Multimedia and Information Technology (NMITCON), Bengaluru, India, 2024, pp. 1-6, doi: 10.1109/NMITCON62075.2024.10699258.
+### Nuruzzaman, Md. (2015). Urban Heat Island: Causes, Effects and Mitigation Measures -A Review. International Journal of Environmental Monitoring and Analysis. 3. 67-73. 10.11648/j.ijema.20150302.15. 
 
-The Rise of Carbon-Neutral Neighborhoods ([Time.com])
-
-Machine Learning-Based Urban Climate Adaptation Strategies ([IEEE])
 
 Conclusion
 This project aims to revolutionize UHI mitigation using AI and IoT-based solutions. By predicting environmental trends and automating cooling strategies, we can reduce urban heat stress, improve air quality, and create sustainable cities.
