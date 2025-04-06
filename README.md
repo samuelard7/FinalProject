@@ -77,6 +77,11 @@ AI system continuously improves using real-time feedback from sensor data.
 
 Urban planners receive regular reports and insights for decision-making.
 
+## Diagram
+
+![ChatGPT Image Apr 7, 2025, 03_29_59 AM](https://github.com/user-attachments/assets/c4a2cd0c-b7fb-472b-b9fc-845d5723840d)
+
+
 ## Literature Survey
 Existing Research & Studies on AI in UHI Mitigation
 "Comparative Analysis of Machine Learning Techniques for Predicting Air Quality in Smart Cities" – Discusses different AI models used for environmental predictions.
