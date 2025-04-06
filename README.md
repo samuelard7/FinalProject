@@ -89,6 +89,48 @@ Findings from Literature Review
 AI models like Random Forest and LSTM provide high accuracy in predicting environmental changes.
 
 IoT and AI integration can create self-adaptive cooling systems that reduce urban heat stress.
+## Gaps
+🔍 1. Lack of Real-Time End-to-End Systems
+Most research papers focus either on:
+
+Collecting environmental data using IoT sensors, or
+
+Predicting air quality/UHI using ML models on existing datasets
+
+But very few integrate:
+
+Sensor-based real-time monitoring + AI-based forecasting + Automated response actions (like cooling or alerting).
+
+🔍 2. Insufficient Use of Deep Learning (e.g., LSTM)
+Many studies use ML techniques like Random Forest, Decision Trees, or SVM.
+
+These models are good, but they don’t capture time-series trends well (e.g., temperature or pollution patterns over days).
+
+There is a gap in using LSTM, GRU, or other temporal DL models that learn trends from historical data for better prediction.
+
+🔍 3. Poor Integration with IoT & Edge Computing
+Some papers suggest smart solutions but don’t implement them on actual hardware like ESP8266/ESP32.
+
+Cloud-based models are often too slow for real-time applications.
+
+This project can bridge this by using microcontrollers for live data capture, and local AI inference (on edge or with cloud fallback).
+
+🔍 4. Limited Mitigation Strategies
+UHI or AQI prediction is useful, but many projects don’t go beyond alerting.
+
+Mitigation (like triggering mist fans, HVAC, water sprinklers) is rarely implemented or automated.
+
+This project proposes to use AI predictions to trigger mitigation (like smart misting or fan systems) via relays.
+
+🔍 5. Lack of Scalable, Low-Cost Prototypes
+Many academic solutions are simulation-based or costly to implement.
+
+Our approach is low-cost (using Arduino/ESP + open-source AI) and scalable, perfect for smart homes or urban areas.
+
+🔍 6. Limited Public Datasets or Sensor Validation
+Some models are trained on open AQI datasets but not validated with live sensor data.
+
+Our system uses actual sensors (DHT22, MQ135, etc.), helping validate the data pipeline from end to
 
 ## Hardware and Software Requirements
 Hardware
