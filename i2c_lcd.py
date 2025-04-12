@@ -3,53 +3,44 @@ from machine import I2C
 from time import sleep_ms
 
 class I2cLcd(LcdApi):
-    ENABLE = 0b00000100
-    BACKLIGHT = 0b00001000
-
     def __init__(self, i2c, i2c_addr, num_lines, num_columns):
         self.i2c = i2c
         self.i2c_addr = i2c_addr
-        self.backlight = self.BACKLIGHT
         self.num_lines = num_lines
         self.num_columns = num_columns
-
-        sleep_ms(50)
-        self._write_init_nibble(0x03)
-        sleep_ms(5)
-        self._write_init_nibble(0x03)
-        sleep_ms(1)
-        self._write_init_nibble(0x03)
-        self._write_init_nibble(0x02)
-
-        self.write_command(0x28)  # Function set: 4-bit, 2 line
-        self.write_command(0x0C)  # Display on, cursor off
-        self.write_command(0x06)  # Entry mode set
-        self.clear()
-
+        self.backlight = 0x08
+        self.init_lcd()
         super().__init__(num_lines, num_columns)
 
-    def _write_byte(self, data):
-        self.i2c.writeto(self.i2c_addr, bytes([data | self.backlight]))
+    def init_lcd(self):
+        sleep_ms(50)
+        self.hal_write_command(0x33)
+        self.hal_write_command(0x32)
+        self.hal_write_command(0x28)
+        self.hal_write_command(0x0C)
+        self.hal_write_command(0x06)
+        self.clear()
 
-    def _pulse(self, data):
-        self._write_byte(data | self.ENABLE)
-        sleep_ms(1)
-        self._write_byte(data & ~self.ENABLE)
-        sleep_ms(1)
+    def hal_write_command(self, cmd):
+        self.send(cmd, 0)
 
-    def _write_init_nibble(self, nibble):
-        self._pulse(nibble << 4)
+    def hal_write_data(self, data):
+        self.send(data, 1)
 
-    def write_command(self, cmd):
-        self._write_nibble(cmd >> 4)
-        self._write_nibble(cmd & 0x0F)
+    def send(self, data, mode):
+        high = data & 0xF0
+        low = (data << 4) & 0xF0
+        self.write4bits(high | mode | self.backlight)
+        self.write4bits(low | mode | self.backlight)
 
-    def write_data(self, data):
-        self._write_nibble(data >> 4, rs=True)
-        self._write_nibble(data & 0x0F, rs=True)
+    def write4bits(self, data):
+        self.i2c.writeto(self.i2c_addr, bytearray([data | 0x04]))
+        self.i2c.writeto(self.i2c_addr, bytearray([data & ~0x04]))
 
-    def _write_nibble(self, nibble, rs=False):
-        data = nibble << 4
-        if rs:
-            data |= 0x01
-        self._pulse(data)
+    def backlight_on(self):
+        self.backlight = 0x08
+        self.send(0x00, 0)
+
+    def backlight_off(self):
+        self.backlight = 0x00
+        self.send(0x00, 0)
