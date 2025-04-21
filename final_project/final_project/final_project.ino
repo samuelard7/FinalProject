@@ -12,18 +12,18 @@ const int maxSends = 20;
 const char* ssid = "Richard";
 const char* password = "Jjjrrr@777";
 
-// ThingSpeak channel info
+
 const char* host = "api.thingspeak.com";
 const String apiKey = "IS28D2SJ28KAHFC3";
 
-// Wi-Fi client
+
 WiFiClient client;
 
 void setup() {
-  Serial.begin(115200);  // For debugging
-  picoSerial.begin(57600);  // Serial1 for UART communication (use the correct UART pins)
+  Serial.begin(115200); 
+  picoSerial.begin(9600);
   
-  // Connect to WiFi
+  
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
@@ -33,29 +33,24 @@ void setup() {
 }
 
 void loop() {
-  // Check if data is available from the Raspberry Pi Pico
-  // if (sendCount >= maxSends) {
-  //   Serial.println("✅ Sent 20 readings to ThingSpeak. Halting serial read.");
-  //   return;
-  // }
-  
-  if (picoSerial.available()==0) { 
-    String sensorData = picoSerial.readStringUntil('\n');  // Read the incoming data
-    sensorData.trim();  // Remove any leading or trailing whitespace
+  if (picoSerial.available()) { 
+    String sensorData = picoSerial.readStringUntil('\n');
+    delay(100);
+    sensorData.trim();  
     Serial.println(sensorData);
 
-    
-    // Parse sensor data
+  
     float temp, hum, aqi;
     if (parseSensorData(sensorData, temp, hum, aqi)) {
       sendToThingSpeak(temp, hum, aqi);
+      picoSerial.println("OK");
       sendCount++;
     } else {
-      Serial.println("❌ Failed to parse sensor data");
+      Serial.println("Failed to parse sensor data");
     }
     
   }
-  delay(1000);  // Wait for a 3sec before checking again
+  delay(1000);
 }
 
 bool parseSensorData(String data, float &temperature, float &humidity, float &aqi) {
@@ -84,8 +79,8 @@ void sendToThingSpeak(float temp, float hum, float aqi) {
                  "Connection: close\r\n\r\n");
 
     client.stop();
-    Serial.println("📤 Data sent to ThingSpeak!");
+    Serial.println("Data sent to ThingSpeak!");
   } else {
-    Serial.println("❌ Failed to connect to ThingSpeak");
+    Serial.println("Failed to connect to ThingSpeak");
   }
 }

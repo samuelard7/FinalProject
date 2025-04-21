@@ -9,7 +9,7 @@ from machine import Pin, UART, ADC
 
 count = 1
 
-uart = UART(0, baudrate=57600, tx=Pin(12), rx= Pin(13))
+uart = UART(0, baudrate=9600, tx=Pin(12), rx= Pin(13))
 
 i2c = I2C(0, scl=Pin(1), sda=Pin(0))
 lcd = I2cLcd(i2c, 0x27, 2, 16)
@@ -38,7 +38,7 @@ def read_and_send_data():
     air = read_air_quality()
     
     data = "{},{},{}\n".format(temp, hum, air)
-    
+    uart.flush()
     uart.write(data)
     print("Data sent to ESP8266:", data)
     
